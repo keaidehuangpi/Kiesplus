@@ -1,0 +1,90 @@
+---- Minecraft Crash Report ----
+// Oh - I know what I did wrong!
+
+Time: 22-1-22 ÏÂÎç9:35
+Description: Rendering screen
+
+java.lang.ClassCastException: java.lang.String cannot be cast to java.lang.Boolean
+	at cn.KiesPro.ui.ClickGui.CSGOClickUI.drawScreen(CSGOClickUI.java:218)
+	at net.minecraft.client.renderer.EntityRenderer.func_181560_a(EntityRenderer.java:1396)
+	at net.minecraft.client.Minecraft.runGameLoop(Minecraft.java:1133)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:425)
+	at net.minecraft.client.main.Main.main(Main.java:113)
+	at Start.main(Start.java:11)
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Stacktrace:
+	at cn.KiesPro.ui.ClickGui.CSGOClickUI.drawScreen(CSGOClickUI.java:218)
+
+-- Screen render details --
+Details:
+	Screen name: cn.KiesPro.ui.ClickGui.CSGOClickUI
+	Mouse location: Scaled: (108, 246). Absolute: (217, 212)
+	Screen size: Scaled: (683, 353). Absolute: (1366, 706). Scale factor of 2
+
+-- Affected level --
+Details:
+	Level name: MpServer
+	All players: 1 total; [EntityPlayerSP['Player464'/334, l='MpServer', x=-270.48, y=70.00, z=284.12]]
+	Chunk stats: MultiplayerChunkCache: 81, 81
+	Level seed: 0
+	Level generator: ID 00 - default, ver 1. Features enabled: false
+	Level generator options: 
+	Level spawn location: -224.00,64.00,240.00 - World: (-224,64,240), Chunk: (at 0,4,0 in -14,15; contains blocks -224,0,240 to -209,255,255), Region: (-1,0; contains chunks -32,0 to -1,31, blocks -512,0,0 to -1,255,511)
+	Level time: 329003 game time, 329003 day time
+	Level dimension: 0
+	Level storage version: 0x00000 - Unknown?
+	Level weather: Rain time: 0 (now: false), thunder time: 0 (now: false)
+	Level game mode: Game mode: creative (ID 1). Hardcore: false. Cheats: false
+	Forced entities: 23 total; [EntityChicken['Chicken'/128, l='MpServer', x=-278.97, y=73.00, z=257.44], EntityZombie['Zombie'/129, l='MpServer', x=-288.01, y=56.00, z=286.34], EntityCow['Cow'/164, l='MpServer', x=-245.25, y=69.00, z=261.72], EntitySheep['Sheep'/102, l='MpServer', x=-321.34, y=72.00, z=318.19], EntitySpider['Spider'/103, l='MpServer', x=-325.59, y=76.00, z=344.09], EntityChicken['Chicken'/107, l='MpServer', x=-313.84, y=71.00, z=287.53], EntityChicken['Chicken'/108, l='MpServer', x=-307.41, y=70.00, z=302.41], EntitySheep['Sheep'/109, l='MpServer', x=-309.50, y=79.00, z=334.50], EntitySheep['Sheep'/110, l='MpServer', x=-318.72, y=76.00, z=343.25], EntityPlayerSP['Player464'/334, l='MpServer', x=-270.48, y=70.00, z=284.12], EntityChicken['Chicken'/113, l='MpServer', x=-289.63, y=64.00, z=213.59], EntityCow['Cow'/114, l='MpServer', x=-297.03, y=71.00, z=265.13], EntityChicken['Chicken'/146, l='MpServer', x=-270.41, y=68.00, z=215.59], EntityChicken['Chicken'/115, l='MpServer', x=-300.32, y=71.00, z=268.79], EntityChicken['Chicken'/147, l='MpServer', x=-267.19, y=70.49, z=247.97], EntityCow['Cow'/116, l='MpServer', x=-298.22, y=71.00, z=261.72], EntityChicken['Chicken'/148, l='MpServer', x=-260.56, y=71.00, z=242.59], EntityItem['item.item.egg'/117, l='MpServer', x=-299.09, y=71.00, z=262.69], EntityItem['item.item.egg'/149, l='MpServer', x=-267.66, y=70.00, z=246.78], EntityItem['item.item.egg'/150, l='MpServer', x=-260.50, y=71.00, z=243.50], EntityCow['Cow'/182, l='MpServer', x=-212.03, y=67.53, z=213.03], EntityChicken['Chicken'/183, l='MpServer', x=-213.41, y=65.00, z=308.50], EntityItem['item.item.egg'/127, l='MpServer', x=-281.31, y=72.00, z=251.06]]
+	Retry entities: 0 total; []
+	Server brand: vanilla
+	Server type: Integrated singleplayer server
+Stacktrace:
+	at net.minecraft.client.multiplayer.WorldClient.addWorldInfoToCrashReport(WorldClient.java:401)
+	at net.minecraft.client.Minecraft.addGraphicsAndWorldToCrashReport(Minecraft.java:2754)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:446)
+	at net.minecraft.client.main.Main.main(Main.java:113)
+	at Start.main(Start.java:11)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.8.8
+	Operating System: Windows 7 (amd64) version 6.1
+	CPU: 4x Intel(R) Core(TM) i5-2520M CPU @ 2.50GHz
+	Java Version: 1.8.0_301, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
+	Memory: 20634272 bytes (19 MB) / 351272960 bytes (335 MB) up to 919076864 bytes (876 MB)
+	JVM Flags: 0 total; 
+	IntCache: cache: 0, tcache: 0, allocated: 13, tallocated: 95
+	Launched Version: mcp
+	LWJGL: 2.9.4
+	OpenGL: Intel(R) HD Graphics 3000 GL version 3.1.0 - Build 9.17.10.4229, Intel
+	GL Caps: Using GL 1.3 multitexturing.
+Using GL 1.3 texture combiners.
+Using framebuffer objects because OpenGL 3.0 is supported and separate blending is supported.
+Shaders are available because OpenGL 2.1 is supported.
+VBOs are available because OpenGL 1.5 is supported.
+
+	Using VBOs: No
+	Is Modded: Definitely; Client brand changed to 'fml,forge'
+	Type: Client (map_client.txt)
+	Resource Packs: 
+	Current Language: English (US)
+	Profiler Position: N/A (disabled)
+	CPU: 4x Intel(R) Core(TM) i5-2520M CPU @ 2.50GHz
+	OptiFine Version: OptiFine_1.8.8_HD_U_H8
+	Render Distance Chunks: 4
+	Mipmaps: 4
+	Anisotropic Filtering: 1
+	Antialiasing: 0
+	Multitexture: false
+	Shaders: null
+	OpenGlVersion: 3.1.0 - Build 9.17.10.4229
+	OpenGlRenderer: Intel(R) HD Graphics 3000
+	OpenGlVendor: Intel
+	CpuCount: 4
