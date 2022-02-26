@@ -18,31 +18,50 @@ import net.minecraft.network.play.server.S27PacketExplosion;
 
 public class AntiVelocity
         extends Module {
-    private Numbers<Double> percentage = new Numbers<Double>("Percentage", "percentage", 0.0, 0.0, 100.0, 5.0);
+    private Numbers<Double> horizontal = new Numbers<Double>("Horizontal", "Horizontal", 0.0, 0.0, 100.0, 1.0);
+    private Numbers<Double> vertical = new Numbers<Double>("Vertical", "Vertical", 0.0, 0.0, 100.0, 1.0);
 
     public AntiVelocity() {
         super("Velocity", new String[]{"antivelocity", "antiknockback", "antikb"}, ModuleType.Player);
-        this.addValues(this.percentage);
+        this.addValues(horizontal,vertical);
         this.setColor(new Color(191, 191, 191).getRGB());
     }
-
     @EventTarget
-    private void onUpdate(EventPreUpdate e) {
-        this.setSuffix(percentage.getValue() + "%");
+    public void onPacketReceive(EventPacketRecieve event) {
+       // if (mode.getValue().equals("Packet")) {
+            if (event.getPacket() instanceof S12PacketEntityVelocity) {
+                S12PacketEntityVelocity packet = (S12PacketEntityVelocity) event.getPacket();
+
+                if (packet.getEntityID() == mc.thePlayer.getEntityId()) {
+                    if (horizontal.getValue() == 0f && vertical.getValue() == 0f) {
+                        event.setCancelled(true);
+                    } else {
+                        packet.motionX=(int) (packet.getMotionX() * horizontal.getValue() / 100.0);
+                        packet.motionY=(int) (packet.getMotionY() * vertical.getValue() / 100.0);
+                        packet.motionZ=(int) (packet.getMotionZ() * horizontal.getValue() / 100.0);
+                    }
+                }
+            }
+
+            //hypixel fucker
+            if (event.getPacket() instanceof S27PacketExplosion) {
+                handle(event);
+            }
+       // }
     }
 
-    @EventTarget
-    private void onPacket(EventPacketRecieve e) {
-        if (e.getPacket() instanceof S12PacketEntityVelocity || e.getPacket() instanceof S27PacketExplosion) {
-            if (this.percentage.getValue().equals(0.0)) {
-                e.setCancelled(true);
-            } else {
-                S12PacketEntityVelocity packet = (S12PacketEntityVelocity) e.getPacket();
-                packet.motionX = (int) (this.percentage.getValue() / 100.0);
-                packet.motionY = (int) (this.percentage.getValue() / 100.0);
-                packet.motionZ = (int) (this.percentage.getValue() / 100.0);
-            }
+
+    public void handle(EventPacketRecieve event) {
+        S27PacketExplosion packet = (S27PacketExplosion) event.getPacket();
+
+        if (horizontal.getValue() == 0f && vertical.getValue() == 0f) {
+            event.setCancelled(true);
+        } else {
+            packet.posX=(packet.getX() * horizontal.getValue() / 100.0f);
+            packet.posY=(packet.getY() * vertical.getValue() / 100.0f);
+            packet.posZ=(packet.getZ() * horizontal.getValue() / 100.0f);
         }
     }
+
 }
 

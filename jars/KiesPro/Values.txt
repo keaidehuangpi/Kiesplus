@@ -39,7 +39,8 @@ TPAura:Animals:false
 TPAura:Mobs:false
 TPAura:Invisible:false
 TPAura:Teams:false
-Velocity:percentage:40.0
+Velocity:Horizontal:0.0
+Velocity:Vertical:0.0
 AutoTool:Sword:true
 Disabler:C0FminDelay:4.0
 Disabler:C0FmaxDelay:6.0
@@ -175,6 +176,5 @@ FastPlace:delay:1.0
 Phase:mode:NewNCP
 Timer:value:1.0
 AutoClicker:mincps:8.0
-AutoClicker:maxcps:12.0
 AutoClicker:Autoblock:false
 Hitbox:Size:1.0

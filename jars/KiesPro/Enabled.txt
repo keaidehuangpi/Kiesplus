@@ -1,7 +1,6 @@
 Criticals
 Velocity
 SpeedMine
-FuckDomcer
 Jesus
 NoSlow
 Sprint
@@ -11,4 +10,3 @@ HUD
 NameTags
 ViewClip
 AutoClicker
-Hitbox

@@ -16,25 +16,28 @@ import org.apache.commons.lang3.RandomUtils;
 public class AutoClicker extends Module {
     private TimeHelper timer = new TimeHelper();
     private TimeHelper blocktimer = new TimeHelper();
-    private static Numbers<Float> mincps=new Numbers<Float>("mincps","mincps",8f, 1.0f, 20.0f, 1.0f);
-    private static Numbers<Float> maxcps=new Numbers<Float>("maxcps","maxcps",12f, 1.0f, 20.0f, 1.0f);
+   private static Numbers<Integer> cps=new Numbers<Integer>("mincps","mincps",14, 1, 20, 1);
+    //private static Numbers<Float> maxcps=new Numbers<Float>("maxcps","maxcps",12f, 1.0f, 20.0f, 1.0f);
     //public static FloatValue mincps = new FloatValue("AutoClicker", "Min CPS", 8, 1.0f, 20.0f, 1.0f);
     //public static FloatValue maxcps = new FloatValue("AutoClicker", "Max CPS", 12, 1.0f, 20.0f, 1.0f);
    //public static BooleanValue autoblock = new BooleanValue("AutoClicker", "Auto Block", false);
     private Option<Boolean> autoblock = new Option<Boolean>("Autoblock", "Autoblock", false);
-    private int delay;
+    double delay;
+
 
     public AutoClicker() {
         //super("Speed", new String[]{"bhop"}, ModuleType.Movement);
         super("AutoClicker",new String[]{"bhop"}, ModuleType.Ghost);
-        this.addValues(mincps,maxcps,autoblock);
+        this.addValues(cps,autoblock);
+        delay=(1000.0/cps.getValue().doubleValue());
     }
 
     @EventTarget
     public void onEnable() {
-        setDelay();
+
 
        super.onEnable();
+
     }
 
     @EventTarget
@@ -45,7 +48,7 @@ public class AutoClicker extends Module {
         if (mc.playerController.curBlockDamageMP != 0F) {
             return;
         }
-        if (timer.delay(delay) && mc.gameSettings.keyBindAttack.pressed) {
+        if ((timer.delay(delay)) && mc.gameSettings.keyBindAttack.pressed) {
             mc.gameSettings.keyBindAttack.pressed = false;
             // autoblock
             if (autoblock.getValue() && mc.objectMouseOver.entityHit != null && mc.objectMouseOver.entityHit.isEntityAlive()){
@@ -57,22 +60,17 @@ public class AutoClicker extends Module {
             mc.leftClickCounter=0;
             mc.clickMouse();
             mc.gameSettings.keyBindAttack.pressed = true;
-            setDelay();
+
             timer.reset();
+
         }
     }
 
-    @EventTarget
-    public void onTick(EventTick event){
-        // 防止最小cps大于最大cps
-        if (mincps.getValue() > maxcps.getValue()) {
-            mincps.setValue(maxcps.getValue());
-        }
-    }
+
 
     private void setDelay()
     {
-        delay = (int) RandomUtils.nextFloat(mincps.getValue(),maxcps.getValue());
+       // delay = (int) RandomUtils.nextFloat(1000.0F / mincps.getValue(), 1000.0F / maxcps.getValue());
 
     }
 }
