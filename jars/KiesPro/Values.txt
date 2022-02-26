@@ -74,7 +74,7 @@ Flight:Ground:false
 Flight:UHC:false
 Jesus:mode:Solid
 LongJump:Hypixel:true
-NoSlow:Mode:fdpaac
+NoSlow:Mode:Hypixel
 NoSlow:booster:false
 Scaffold:Priority:Normal
 Scaffold:ESP:ZeroDay
@@ -140,7 +140,6 @@ NameTags:armor:true
 NameTags:durability:true
 NameTags:invisibles:true
 NameTags:scale:1.2
-NameTags:distance:false
 PointerESP:mode:Solid
 PointerESP:Player:true
 PointerESP:Animals:false
@@ -176,5 +175,5 @@ FastPlace:delay:1.0
 Phase:mode:NewNCP
 Timer:value:1.0
 AutoClicker:mincps:8.0
-AutoClicker:Autoblock:false
+AutoClicker:Autoblock:true
 Hitbox:Size:1.0

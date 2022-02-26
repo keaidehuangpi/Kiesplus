@@ -7,11 +7,8 @@ import java.awt.Color;
 
 import cn.KiesPro.Client;
 import cn.KiesPro.api.EventTarget;
+import cn.KiesPro.api.events.world.*;
 import cn.KiesPro.utils.*;
-import cn.KiesPro.api.events.world.EventPostUpdate;
-import cn.KiesPro.api.events.world.EventPreUpdate;
-import cn.KiesPro.api.events.world.EventStep;
-import cn.KiesPro.api.events.world.MotionUpdateEvent;
 import cn.KiesPro.api.value.Mode;
 import cn.KiesPro.api.value.Option;
 import cn.KiesPro.module.Module;
@@ -28,6 +25,7 @@ import net.minecraft.item.ItemSword;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.client.C07PacketPlayerDigging;
 import net.minecraft.network.play.client.C08PacketPlayerBlockPlacement;
+import net.minecraft.network.play.server.S30PacketWindowItems;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.client.network.*;
@@ -39,6 +37,7 @@ public class NoSlow extends Module {
     private MSTimer msTimer= new MSTimer();
 	private Option<Boolean> booster = new Option<Boolean>("booster", "booster", false);
 	private Mode<Enum> mode = new Mode("Mode", "Mode", (Enum[]) SlowMode.values(), (Enum) SlowMode.Hypixel);
+	public static int ticks = 0;
     public NoSlow() {
         super("NoSlow", new String[]{"noslowdown"}, ModuleType.Movement);
         this.setColor(new Color(216, 253, 100).getRGB());
@@ -46,7 +45,26 @@ public class NoSlow extends Module {
 		this.addValues(booster);
 		}
 
+
 	@EventTarget
+	public void onPost(EventPostUpdate e) {
+		if (mode.getValue() == SlowMode.Hypixel) {
+			if (mc.thePlayer.isUsingItem() || mc.thePlayer.isBlocking()) {
+				int process = Math.min(Math.round(((mc.thePlayer.ticksExisted - ticks) / 30f * 100)), 100);
+
+				mc.getNetHandler().addToSendQueue(new C08PacketPlayerBlockPlacement(new BlockPos(-1, -1, -1), 255,
+						mc.thePlayer.inventory.getCurrentItem(), 0f, 0f, 0f));
+			} else {
+				ticks = mc.thePlayer.ticksExisted;
+			}
+		}
+	}
+	public void onPacket(EventPacketRecieve e) {
+		if (mode.getValue() == SlowMode.Hypixel && e.getPacket() instanceof S30PacketWindowItems && (mc.thePlayer.isUsingItem() || mc.thePlayer.isBlocking())) {
+			ticks = mc.thePlayer.ticksExisted;
+			e.setCancelled(true);
+		}
+	}
 	public void onUpdate(MotionUpdateEvent e) {
 		this.setSuffix(mode.getValue());
     if (mc.thePlayer.isBlocking() || (Killaura.blocking.getValue().booleanValue()&&Killaura.curTarget!=null&&isHoldingSword())) {
@@ -85,17 +103,7 @@ public class NoSlow extends Module {
 		}
 
 
-		if(mode.getValue() == SlowMode.Hypixel) {
-			if(e.isPre()) {
-				if(mc.thePlayer.isBlocking() && PlayerUtil.isMoving() && isOnGround(0.42)){			
-					mc.thePlayer.sendQueue.addToSendQueue(new C07PacketPlayerDigging(C07PacketPlayerDigging.Action.RELEASE_USE_ITEM, BlockPos.ORIGIN, EnumFacing.DOWN));
-				}
-			}else {
-				if(mc.thePlayer.isBlocking() && PlayerUtil.isMoving() && isOnGround(0.42) && Killaura.target != null){
-					mc.thePlayer.sendQueue.addToSendQueue(new C08PacketPlayerBlockPlacement(PlayerUtil.getHypixelBlockpos(mc.getSession().getUsername()), 255, mc.thePlayer.inventory.getCurrentItem(), 0,0,0));
-				}
-			}
-		}else if(mode.getValue() == SlowMode.Hypixel2) {
+		else if(mode.getValue() == SlowMode.Hypixel2) {
 			if(mc.thePlayer.isUsingItem()||mc.thePlayer.isBlocking()||Killaura.blocking.getValue().booleanValue()) {
 	            if (e.isPre()) {
 	                mc.playerController.syncCurrentPlayItem();

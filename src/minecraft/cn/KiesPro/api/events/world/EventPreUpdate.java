@@ -10,7 +10,7 @@ extends Event {
     private float yaw;
     private float pitch;
     public double y;
-    private boolean ground;
+    public boolean ground;
 
     public EventPreUpdate(float yaw, float pitch, double y, boolean ground) {
         this.yaw = yaw;

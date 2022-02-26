@@ -51,10 +51,9 @@ import cn.KiesPro.module.modules.player.Teams;
 import cn.KiesPro.utils.render.RenderUtil;
 
 public class Nametags
-extends Module {
+		extends Module {
 	private Option<Boolean> armor = new Option<Boolean>("Armor", "armor", true);
 	private Option<Boolean> dura = new Option<Boolean>("Durability", "durability", true);
-	private Option<Boolean> distance = new Option<Boolean>("Distance", "distance", false);
 	private Numbers<Double> scale = new Numbers<Double>("Scale", "scale", 1.0, 1.0, 5.0, 0.1);
 	public ArrayList<Entity> entities = new ArrayList();
 	public Option<Boolean> invis = new Option<Boolean>("Invisibles", "invisibles", false);
@@ -63,7 +62,7 @@ extends Module {
 	public Nametags() {
 		super("NameTags", new String[] { "tags" }, ModuleType.Render);
 		setColor(new Color(29, 187, 102).getRGB());
-		addValues(armor, dura, invis, scale,distance);
+		addValues(armor, dura, invis, scale);
 	}
 
 	@EventTarget
@@ -106,18 +105,12 @@ extends Module {
 		} else {
 			var13 = "";
 		}
-		
-        BigDecimal DT = new BigDecimal((int)mc.thePlayer.getDistanceToEntity(entity));
+
+		BigDecimal DT = new BigDecimal((int)mc.thePlayer.getDistanceToEntity(entity));
 		DT = DT.setScale(1, RoundingMode.HALF_UP);
 		int Dis = DT.intValue();
-		String var14;
-    if (distance.getValue().booleanValue()) {
-      var14 = /*"��a[��f" + Dis + "m��a] " + "��f" +*/
-          var13 + var12 + tag + " health: " + (int) entity.getHealth() +"   |Distance: "+(int)(entity.getDistanceToEntity(mc.thePlayer))+"m";
-			}else {var14 = /*"��a[��f" + Dis + "m��a] " + "��f" +*/
-			var13 + var12 + tag + " health: " + (int) entity.getHealth();
 
-	}
+		String var14 = "§a[§f" + Dis + "m§a] " + "§f" + var13 + var12 + tag + " §f| §a" + (int) entity.getHealth();
 		String var15 = "\u00a77HP:" + (int) entity.getHealth();
 		GL11.glPushMatrix();
 		GL11.glTranslatef((float) pX, (float) pY + 1.4F, (float) pZ);
@@ -149,7 +142,7 @@ extends Module {
 			int var20 = 0;
 			ItemStack[] var24 = entity.inventory.armorInventory;
 			int var23 = entity.inventory.armorInventory.length;
-	
+
 			ItemStack var21;
 			for (int var22 = 0; var22 < var23; ++var22) {
 				var21 = var24[var22];
@@ -157,7 +150,7 @@ extends Module {
 					var20 -= 11;
 				}
 			}
-	
+
 			if (entity.getHeldItem() != null) {
 				var20 -= 8;
 				var21 = entity.getHeldItem().copy();
@@ -165,14 +158,14 @@ extends Module {
 						|| ((ItemStack) var21).getItem() instanceof ItemArmor)) {
 					((ItemStack) var21).stackSize = 1;
 				}
-	
+
 				renderItemStack((ItemStack) var21, var20, -40);
 				var20 += 20;
 			}
-	
+
 			ItemStack[] var25 = entity.inventory.armorInventory;
 			int var28 = entity.inventory.armorInventory.length;
-	
+
 			for (var23 = 0; var23 < var28; ++var23) {
 				ItemStack var27 = var25[var23];
 				if (var27 != null) {
@@ -186,7 +179,7 @@ extends Module {
 				}
 			}
 		}
-		
+
 		GL11.glPopMatrix();
 		revertAllCaps();
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
@@ -271,7 +264,7 @@ extends Module {
 	}
 
 	public void drawBorderedRectNameTag(float var1, float var2, float var3, float var4, float var5, int var6,
-			int var7) {
+										int var7) {
 		RenderUtil.drawRect(var1, var2, var3, var4, var7);
 		float var8 = (float) (var6 >> 24 & 255) / 255.0F;
 		float var9 = (float) (var6 >> 16 & 255) / 255.0F;

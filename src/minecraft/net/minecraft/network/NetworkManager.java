@@ -507,6 +507,7 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet>
             else
             {
                 logger.warn("handleDisconnection() called twice");
+
             }
         }
     }

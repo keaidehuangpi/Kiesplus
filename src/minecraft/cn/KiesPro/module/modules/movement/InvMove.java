@@ -1,5 +1,6 @@
 package cn.KiesPro.module.modules.movement;
 
+import cn.KiesPro.api.events.rendering.EventRender2D;
 import org.lwjgl.input.Keyboard;
 
 import cn.KiesPro.api.EventTarget;
@@ -16,14 +17,16 @@ public class InvMove extends Module{
 	}
 	
 	@EventTarget
-	public void onUpdate(EventPreUpdate event) {
-		if (this.mc.currentScreen != null && !(this.mc.currentScreen instanceof GuiChat)) {
-			KeyBinding[] key = { this.mc.gameSettings.keyBindForward, this.mc.gameSettings.keyBindBack, this.mc.gameSettings.keyBindLeft, this.mc.gameSettings.keyBindRight, this.mc.gameSettings.keyBindSprint, this.mc.gameSettings.keyBindJump };
-			KeyBinding[] array;
-			for (int length = (array = key).length, i = 0; i < length; ++i) {
-				KeyBinding b = array[i];
-				KeyBinding.setKeyBindState(b.getKeyCode(), Keyboard.isKeyDown(b.getKeyCode()));
-			}
+
+	public void onRender2D(EventRender2D event) {
+		if (mc.currentScreen != null && !(mc.currentScreen instanceof GuiChat)) {
+			mc.gameSettings.keyBindForward.pressed=(Keyboard.isKeyDown(mc.gameSettings.keyBindForward.getKeyCode()));
+			mc.gameSettings.keyBindBack.pressed=(Keyboard.isKeyDown(mc.gameSettings.keyBindBack.getKeyCode()));
+			mc.gameSettings.keyBindLeft.pressed=(Keyboard.isKeyDown(mc.gameSettings.keyBindLeft.getKeyCode()));
+			mc.gameSettings.keyBindRight.pressed=(Keyboard.isKeyDown(mc.gameSettings.keyBindRight.getKeyCode()));
+
+				mc.gameSettings.keyBindJump.pressed=(Keyboard.isKeyDown(mc.gameSettings.keyBindJump.getKeyCode()));
+
 		}
 	}
 }

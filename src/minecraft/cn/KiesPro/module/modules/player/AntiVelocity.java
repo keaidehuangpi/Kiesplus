@@ -27,7 +27,7 @@ public class AntiVelocity
         this.setColor(new Color(191, 191, 191).getRGB());
     }
     @EventTarget
-    public void onPacketReceive(EventPacketRecieve event) {
+    public void onPacket(EventPacketRecieve event) {
        // if (mode.getValue().equals("Packet")) {
             if (event.getPacket() instanceof S12PacketEntityVelocity) {
                 S12PacketEntityVelocity packet = (S12PacketEntityVelocity) event.getPacket();

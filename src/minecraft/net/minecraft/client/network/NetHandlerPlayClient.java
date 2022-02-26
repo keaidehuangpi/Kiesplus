@@ -796,6 +796,7 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
      */
     public void onDisconnect(IChatComponent reason)
     {
+
         this.gameController.loadWorld((WorldClient)null);
 
         if (this.guiScreenServer != null)

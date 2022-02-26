@@ -15,6 +15,7 @@ import cn.KiesPro.module.Module;
 import cn.KiesPro.module.ModuleType;
 import cn.KiesPro.utils.Helper;
 import cn.KiesPro.utils.MoveUtil;
+import cn.KiesPro.utils.PlayerUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.network.NetHandlerPlayClient;
@@ -23,67 +24,59 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.client.C03PacketPlayer;
 
 public class NoFall
-extends Module {
-	double fall;
-	private Mode mode = new Mode("Mode", "mode", (Enum[])NoFallMode.values(), (Enum)NoFallMode.Hypixel);
-	public Numbers<Double> falldistance = new Numbers<Double>("FallDistance", "FallDistance", 2.5D, 1.0D, 4.0D, 0.5D);
-	private float lastFall;
-	public NoFall() {
+        extends Module {
+    double fall;
+    private Mode mode = new Mode("Mode", "mode", (Enum[]) NoFallMode.values(), (Enum) NoFallMode.Hypixel);
+    //public Numbers<Double> falldistance = new Numbers<Double>("FallDistance", "FallDistance", 2.5D, 1.0D, 4.0D, 0.5D);
+    private float lastFall;
+
+    public NoFall() {
         super("NoFall", new String[]{"Nofalldamage"}, ModuleType.Player);
         this.setColor(new Color(242, 137, 73).getRGB());
-        this.addValues(mode, falldistance);
+        this.addValues(mode);
     }
-	
+
     @EventTarget
-    private void onUpdate(EventPreUpdate e) {
-    	this.setSuffix(mode.getValue());
-    	if(mode.getValue() == NoFallMode.Hypixel) {
-            NetworkManager var1 = mc.thePlayer.sendQueue.getNetworkManager();
-            float falldis = 2.4f + (float)MoveUtil.getJumpEffect();
-	        if (mc.thePlayer.fallDistance - this.lastFall >= falldis && mc.thePlayer.capabilities.isCreativeMode == false) {
-	            this.lastFall = mc.thePlayer.fallDistance;
-	            var1.sendPacketNoEvent(new C03PacketPlayer(true));
-	        } else if (mc.thePlayer.isCollidedVertically) {
-	            this.lastFall = 0.0f;
-	        }
-        }else if(mode.getValue() == NoFallMode.Hypixel2) {
-            NetworkManager var1 = mc.thePlayer.sendQueue.getNetworkManager();
-            float falldis = falldistance.getValue().floatValue() + (float)MoveUtil.getJumpEffect();
-	        if (mc.thePlayer.fallDistance - this.lastFall >= falldis && mc.thePlayer.capabilities.isCreativeMode == false) {
-	            this.lastFall = mc.thePlayer.fallDistance;
-	            var1.sendPacketNoEvent(new C03PacketPlayer(true));
-	        } else if (mc.thePlayer.isCollidedVertically) {
-	            this.lastFall = 0.0f;
-	        }
-        }else if(mode.getValue() == NoFallMode.Packet) {
-            if (mc.thePlayer.fallDistance > 2F)
-                mc.getNetHandler().addToSendQueue(new C03PacketPlayer(true));
+    public void onPacket(EventPacketSend e) {
+        if (mode.getValue() == NoFallMode.Hypixel && e.getPacket() instanceof C03PacketPlayer) {
+            C03PacketPlayer packet = (C03PacketPlayer) e.getPacket();
+
+            if (!mc.thePlayer.capabilities.isFlying && !mc.thePlayer.capabilities.disableDamage && mc.thePlayer.motionY < 0.0d && packet.isMoving() && mc.thePlayer.fallDistance > 2.0f) {
+                e.setCancelled(true);
+                mc.getNetHandler().getNetworkManager().sendPacketNoEvent(new C03PacketPlayer.C04PacketPlayerPosition(packet.x, packet.y, packet.z, packet.onGround));
+            }
         }
     }
-    
+
+    //private DelayTimer timer = new DelayTimer();
+
+
     @EventTarget
-    private void onPacket(EventPacketSend e) {
-    	if(mode.getValue() == NoFallMode.Edit) {
-			if(e.getPacket() instanceof C03PacketPlayer) {
-	    		if(!MoveUtil.isOnGround(0.001)){
-	    			if(mc.thePlayer.motionY < -0.08)
-	    				fall -= mc.thePlayer.motionY;
-	    			if(fall > 2){
-	    				fall = 0;
-	    			
-	    				mc.thePlayer.sendQueue.getNetworkManager().sendPacketNoEvent(new C03PacketPlayer(true));
-	        		}
-	    		}else
-	    			fall = 0;
-				}
-    	}
+    public void onMove(EventPreUpdate event) {
+        if (mode.getValue() == NoFallMode.Normal) {
+            if (mc.thePlayer.fallDistance > 2 || PlayerUtils.getDistanceToFall() > 2) {
+                event.ground = true;
+            }
+        } else if (mode.getValue() == NoFallMode.Setback) {
+            if (mc.thePlayer.fallDistance > 5) {
+                event.y += 0.2;
+            }
+        }
+        if (mode.getValue() == NoFallMode.Hypixel) {
+            if (!mc.thePlayer.capabilities.isFlying && !mc.thePlayer.capabilities.disableDamage && mc.thePlayer.motionY < 0.0d && mc.thePlayer.fallDistance > 3.0f) {
+                mc.getNetHandler().getNetworkManager().sendPacketNoEvent(new C03PacketPlayer(true));
+            }
+        }
+
+
     }
-    
+
     enum NoFallMode {
-    	Hypixel,
-    	Hypixel2,
-    	Packet,
-    	Edit;
+        Normal,
+        Setback,
+        Hypixel;
+
     }
+
 }
 
