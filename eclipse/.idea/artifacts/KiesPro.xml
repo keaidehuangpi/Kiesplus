@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="KiesPro">
+    <output-path>$PROJECT_DIR$/out/artifacts/KiesPro</output-path>
+    <root id="archive" name="KiesPro.jar">
+      <element id="module-output" name="Client" />
+      <element id="library" level="project" name="mcjar" />
+      <element id="file-copy" path="$PROJECT_DIR$/../viamcp/libs/ViaBackwards-3.3.0-21w15a.jar" />
+      <element id="file-copy" path="$PROJECT_DIR$/../viamcp/libs/ViaSnakeYaml-1.27.jar" />
+      <element id="file-copy" path="$PROJECT_DIR$/../viamcp/libs/ViaRewind-1.5.4-SNAPSHOT.jar" />
+      <element id="file-copy" path="$PROJECT_DIR$/../viamcp/libs/ViaVersion-3.3.0-21w16a.jar" />
+    </root>
+  </artifact>
+</component>

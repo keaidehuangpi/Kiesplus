@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="mcjar">
+    <CLASSES>
+      <root url="file://E:/mcjar" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://E:/mcjar" />
+    </SOURCES>
+    <jarDirectory url="file://E:/mcjar" recursive="false" />
+    <jarDirectory url="file://E:/mcjar" recursive="false" type="SOURCES" />
+  </library>
+</component>

@@ -1,0 +1,96 @@
+---- Minecraft Crash Report ----
+// I blame Dinnerbone.
+
+Time: 22-2-26 下午5:33
+Description: Rendering screen
+
+java.lang.ClassCastException: java.lang.Double cannot be cast to java.lang.Float
+	at cn.KiesPro.module.modules.Ghost.AutoClicker.setDelay(AutoClicker.java:75)
+	at cn.KiesPro.module.modules.Ghost.AutoClicker.onEnable(AutoClicker.java:35)
+	at cn.KiesPro.module.Module.setEnabled(Module.java:100)
+	at cn.KiesPro.ui.ClickGui.CSGOClickUI.drawScreen(CSGOClickUI.java:131)
+	at net.minecraft.client.renderer.EntityRenderer.func_181560_a(EntityRenderer.java:1396)
+	at net.minecraft.client.Minecraft.runGameLoop(Minecraft.java:1136)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:428)
+	at net.minecraft.client.main.Main.main(Main.java:113)
+	at Start.main(Start.java:11)
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Stacktrace:
+	at cn.KiesPro.module.modules.Ghost.AutoClicker.setDelay(AutoClicker.java:75)
+	at cn.KiesPro.module.modules.Ghost.AutoClicker.onEnable(AutoClicker.java:35)
+	at cn.KiesPro.module.Module.setEnabled(Module.java:100)
+	at cn.KiesPro.ui.ClickGui.CSGOClickUI.drawScreen(CSGOClickUI.java:131)
+
+-- Screen render details --
+Details:
+	Screen name: cn.KiesPro.ui.ClickGui.CSGOClickUI
+	Mouse location: Scaled: (241, 144). Absolute: (483, 416)
+	Screen size: Scaled: (683, 353). Absolute: (1366, 706). Scale factor of 2
+
+-- Affected level --
+Details:
+	Level name: MpServer
+	All players: 7 total; [EntityOtherPlayerMP['§a宝石学家'/420, l='MpServer', x=196.50, y=14.00, z=89.50], EntityOtherPlayerMP['§e开始宝藏猎人小游戏!'/423, l='MpServer', x=199.50, y=14.00, z=87.50], EntityOtherPlayerMP['§e称号术士'/426, l='MpServer', x=199.50, y=14.00, z=101.50], EntityOtherPlayerMP['§6金镑商人'/429, l='MpServer', x=196.50, y=14.00, z=99.50], EntityOtherPlayerMP['§6主城§a接头员'/432, l='MpServer', x=204.50, y=14.00, z=102.50], EntityOtherPlayerMP['§b圣诞村の村民'/449, l='MpServer', x=227.50, y=16.00, z=94.50], EntityPlayerSP['Player180'/543581, l='MpServer', x=210.50, y=14.00, z=94.50]]
+	Chunk stats: MultiplayerChunkCache: 169, 169
+	Level seed: 0
+	Level generator: ID 01 - flat, ver 0. Features enabled: false
+	Level generator options: 
+	Level spawn location: 8.00,64.00,8.00 - World: (8,64,8), Chunk: (at 8,4,8 in 0,0; contains blocks 0,0,0 to 15,255,15), Region: (0,0; contains chunks 0,0 to 31,31, blocks 0,0,0 to 511,255,511)
+	Level time: 127726 game time, 1214000 day time
+	Level dimension: 0
+	Level storage version: 0x00000 - Unknown?
+	Level weather: Rain time: 0 (now: false), thunder time: 0 (now: false)
+	Level game mode: Game mode: survival (ID 0). Hardcore: false. Cheats: false
+	Forced entities: 18 total; [EntityArmorStand['§e手持§4系统§6菜单§e并右键'/416, l='MpServer', x=200.50, y=14.47, z=94.50], EntityArmorStand['§e或在聊天框中输入§b/menu'/417, l='MpServer', x=200.50, y=14.22, z=94.50], EntityOtherPlayerMP['§b圣诞村の村民'/449, l='MpServer', x=227.50, y=16.00, z=94.50], EntityArmorStand['§e以打开系统菜单~'/418, l='MpServer', x=200.50, y=13.97, z=94.50], EntityArmorStand['§aPafoo§b欢迎您~'/419, l='MpServer', x=194.59, y=14.22, z=94.50], EntityOtherPlayerMP['§a宝石学家'/420, l='MpServer', x=196.50, y=14.00, z=89.50], EntityOtherPlayerMP['§e开始宝藏猎人小游戏!'/423, l='MpServer', x=199.50, y=14.00, z=87.50], EntityOtherPlayerMP['§e称号术士'/426, l='MpServer', x=199.50, y=14.00, z=101.50], EntityOtherPlayerMP['§6金镑商人'/429, l='MpServer', x=196.50, y=14.00, z=99.50], EntityPlayerSP['Player180'/543581, l='MpServer', x=210.50, y=14.00, z=94.50], EntityPlayerSP['Player180'/543581, l='MpServer', x=210.50, y=14.00, z=94.50], EntityOtherPlayerMP['§6主城§a接头员'/432, l='MpServer', x=204.50, y=14.00, z=102.50], EntityOtherPlayerMP['§a宝石学家'/420, l='MpServer', x=196.50, y=14.00, z=89.50], EntityOtherPlayerMP['§e开始宝藏猎人小游戏!'/423, l='MpServer', x=199.50, y=14.00, z=87.50], EntityOtherPlayerMP['§e称号术士'/426, l='MpServer', x=199.50, y=14.00, z=101.50], EntityOtherPlayerMP['§6金镑商人'/429, l='MpServer', x=196.50, y=14.00, z=99.50], EntityOtherPlayerMP['§6主城§a接头员'/432, l='MpServer', x=204.50, y=14.00, z=102.50], EntityOtherPlayerMP['§b圣诞村の村民'/449, l='MpServer', x=227.50, y=16.00, z=94.50]]
+	Retry entities: 0 total; []
+	Server brand: Paper
+	Server type: Non-integrated multiplayer server
+Stacktrace:
+	at net.minecraft.client.multiplayer.WorldClient.addWorldInfoToCrashReport(WorldClient.java:401)
+	at net.minecraft.client.Minecraft.addGraphicsAndWorldToCrashReport(Minecraft.java:2757)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:449)
+	at net.minecraft.client.main.Main.main(Main.java:113)
+	at Start.main(Start.java:11)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.8.8
+	Operating System: Windows 7 (amd64) version 6.1
+	CPU: 4x Intel(R) Core(TM) i5-2520M CPU @ 2.50GHz
+	Java Version: 1.8.0_301, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
+	Memory: 309776312 bytes (295 MB) / 433586176 bytes (413 MB) up to 919076864 bytes (876 MB)
+	JVM Flags: 0 total; 
+	IntCache: cache: 8, tcache: 89, allocated: 13, tallocated: 95
+	Launched Version: mcp
+	LWJGL: 2.9.4
+	OpenGL: Intel(R) HD Graphics 3000 GL version 3.1.0 - Build 9.17.10.4229, Intel
+	GL Caps: Using GL 1.3 multitexturing.
+Using GL 1.3 texture combiners.
+Using framebuffer objects because OpenGL 3.0 is supported and separate blending is supported.
+Shaders are available because OpenGL 2.1 is supported.
+VBOs are available because OpenGL 1.5 is supported.
+
+	Using VBOs: No
+	Is Modded: Definitely; Client brand changed to 'fml,forge'
+	Type: Client (map_client.txt)
+	Resource Packs: 
+	Current Language: English (US)
+	Profiler Position: N/A (disabled)
+	CPU: 4x Intel(R) Core(TM) i5-2520M CPU @ 2.50GHz
+	OptiFine Version: OptiFine_1.8.8_HD_U_H8
+	Render Distance Chunks: 4
+	Mipmaps: 4
+	Anisotropic Filtering: 1
+	Antialiasing: 0
+	Multitexture: false
+	Shaders: null
+	OpenGlVersion: 3.1.0 - Build 9.17.10.4229
+	OpenGlRenderer: Intel(R) HD Graphics 3000
+	OpenGlVendor: Intel
+	CpuCount: 4

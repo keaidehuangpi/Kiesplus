@@ -1,0 +1,96 @@
+---- Minecraft Crash Report ----
+// My bad.
+
+Time: 22-2-26 下午5:39
+Description: Rendering screen
+
+java.lang.ClassCastException: java.lang.Double cannot be cast to java.lang.Float
+	at cn.KiesPro.module.modules.Ghost.AutoClicker.setDelay(AutoClicker.java:76)
+	at cn.KiesPro.module.modules.Ghost.AutoClicker.onEnable(AutoClicker.java:36)
+	at cn.KiesPro.module.Module.setEnabled(Module.java:100)
+	at cn.KiesPro.ui.ClickGui.CSGOClickUI.drawScreen(CSGOClickUI.java:131)
+	at net.minecraft.client.renderer.EntityRenderer.func_181560_a(EntityRenderer.java:1396)
+	at net.minecraft.client.Minecraft.runGameLoop(Minecraft.java:1136)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:428)
+	at net.minecraft.client.main.Main.main(Main.java:113)
+	at Start.main(Start.java:11)
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Stacktrace:
+	at cn.KiesPro.module.modules.Ghost.AutoClicker.setDelay(AutoClicker.java:76)
+	at cn.KiesPro.module.modules.Ghost.AutoClicker.onEnable(AutoClicker.java:36)
+	at cn.KiesPro.module.Module.setEnabled(Module.java:100)
+	at cn.KiesPro.ui.ClickGui.CSGOClickUI.drawScreen(CSGOClickUI.java:131)
+
+-- Screen render details --
+Details:
+	Screen name: cn.KiesPro.ui.ClickGui.CSGOClickUI
+	Mouse location: Scaled: (250, 140). Absolute: (500, 424)
+	Screen size: Scaled: (683, 353). Absolute: (1366, 706). Scale factor of 2
+
+-- Affected level --
+Details:
+	Level name: MpServer
+	All players: 1 total; [EntityPlayerSP['Player954'/127, l='MpServer', x=127.52, y=72.00, z=459.38]]
+	Chunk stats: MultiplayerChunkCache: 81, 81
+	Level seed: 0
+	Level generator: ID 00 - default, ver 1. Features enabled: false
+	Level generator options: 
+	Level spawn location: -224.00,64.00,240.00 - World: (-224,64,240), Chunk: (at 0,4,0 in -14,15; contains blocks -224,0,240 to -209,255,255), Region: (-1,0; contains chunks -32,0 to -1,31, blocks -512,0,0 to -1,255,511)
+	Level time: 637556 game time, 132351 day time
+	Level dimension: 0
+	Level storage version: 0x00000 - Unknown?
+	Level weather: Rain time: 0 (now: false), thunder time: 0 (now: false)
+	Level game mode: Game mode: creative (ID 1). Hardcore: false. Cheats: false
+	Forced entities: 52 total; [EntityXPOrb['Experience Orb'/128, l='MpServer', x=140.72, y=68.00, z=450.47], EntityChicken['Chicken'/129, l='MpServer', x=155.31, y=76.00, z=464.31], EntityPig['Pig'/132, l='MpServer', x=73.00, y=75.00, z=408.00], EntityRabbit['Rabbit'/133, l='MpServer', x=67.31, y=77.00, z=407.47], EntityPig['Pig'/134, l='MpServer', x=77.25, y=76.00, z=416.88], EntityPig['Pig'/135, l='MpServer', x=68.28, y=80.00, z=421.47], EntityRabbit['Rabbit'/139, l='MpServer', x=73.25, y=75.00, z=509.69], EntityRabbit['Rabbit'/140, l='MpServer', x=70.44, y=75.00, z=525.50], EntityCow['Cow'/141, l='MpServer', x=65.97, y=74.00, z=516.13], EntityRabbit['Rabbit'/142, l='MpServer', x=78.84, y=72.00, z=515.38], EntityRabbit['Rabbit'/143, l='MpServer', x=69.44, y=73.00, z=515.72], EntityRabbit['Rabbit'/144, l='MpServer', x=64.53, y=73.00, z=519.72], EntitySkeleton['Skeleton'/146, l='MpServer', x=88.50, y=16.00, z=396.50], EntityRabbit['Rabbit'/148, l='MpServer', x=84.50, y=72.00, z=393.50], EntityRabbit['Rabbit'/149, l='MpServer', x=87.53, y=72.00, z=404.69], EntitySkeleton['Skeleton'/917, l='MpServer', x=102.50, y=20.00, z=401.50], EntityPlayerSP['Player954'/127, l='MpServer', x=127.52, y=72.00, z=459.38], EntityPig['Pig'/151, l='MpServer', x=82.91, y=73.00, z=401.75], EntityRabbit['Rabbit'/152, l='MpServer', x=86.31, y=77.00, z=408.84], EntityRabbit['Rabbit'/153, l='MpServer', x=104.16, y=63.00, z=458.44], EntityRabbit['Rabbit'/154, l='MpServer', x=80.47, y=79.00, z=464.50], EntityCow['Cow'/155, l='MpServer', x=92.78, y=66.00, z=501.56], EntityCow['Cow'/156, l='MpServer', x=83.72, y=68.00, z=518.81], EntityZombie['Zombie'/161, l='MpServer', x=109.63, y=16.00, z=427.63], EntityRabbit['Rabbit'/163, l='MpServer', x=99.44, y=72.00, z=465.44], EntityCow['Cow'/164, l='MpServer', x=120.00, y=74.00, z=386.78], EntityBat['Bat'/173, l='MpServer', x=124.25, y=19.10, z=449.31], EntityRabbit['Rabbit'/174, l='MpServer', x=122.50, y=63.00, z=479.38], EntityBat['Bat'/814, l='MpServer', x=79.59, y=20.97, z=501.38], EntityZombie['Zombie'/1070, l='MpServer', x=117.85, y=20.78, z=410.36], EntityZombie['Zombie'/175, l='MpServer', x=134.47, y=19.00, z=428.94], EntityCreeper['Creeper'/1072, l='MpServer', x=126.73, y=19.03, z=444.62], EntityChicken['Chicken'/179, l='MpServer', x=143.41, y=62.63, z=443.34], EntityRabbit['Rabbit'/180, l='MpServer', x=131.41, y=63.00, z=442.50], EntityRabbit['Rabbit'/183, l='MpServer', x=155.50, y=64.00, z=433.50], EntityChicken['Chicken'/184, l='MpServer', x=157.53, y=76.00, z=474.34], EntitySkeleton['Skeleton'/187, l='MpServer', x=174.19, y=51.00, z=412.22], EntityRabbit['Rabbit'/188, l='MpServer', x=171.50, y=72.00, z=405.50], EntityRabbit['Rabbit'/189, l='MpServer', x=164.44, y=71.00, z=405.50], EntityRabbit['Rabbit'/190, l='MpServer', x=160.44, y=69.00, z=404.75], EntityRabbit['Rabbit'/191, l='MpServer', x=175.78, y=72.00, z=408.50], EntityCow['Cow'/193, l='MpServer', x=182.50, y=73.00, z=399.50], EntityCow['Cow'/194, l='MpServer', x=188.63, y=71.00, z=391.25], EntityCow['Cow'/195, l='MpServer', x=179.38, y=72.00, z=403.50], EntitySquid['Squid'/835, l='MpServer', x=105.97, y=61.00, z=520.84], EntityCow['Cow'/196, l='MpServer', x=181.72, y=72.00, z=409.72], EntitySkeleton['Skeleton'/199, l='MpServer', x=187.81, y=39.00, z=434.13], EntityChicken['Chicken'/200, l='MpServer', x=179.53, y=77.00, z=445.94], EntitySkeleton['Skeleton'/203, l='MpServer', x=190.72, y=39.00, z=436.78], EntityCreeper['Creeper'/973, l='MpServer', x=64.50, y=54.00, z=484.50], EntityCreeper['Creeper'/745, l='MpServer', x=130.00, y=18.00, z=405.41], EntityCreeper['Creeper'/1268, l='MpServer', x=119.80, y=20.82, z=410.69]]
+	Retry entities: 0 total; []
+	Server brand: vanilla
+	Server type: Integrated singleplayer server
+Stacktrace:
+	at net.minecraft.client.multiplayer.WorldClient.addWorldInfoToCrashReport(WorldClient.java:401)
+	at net.minecraft.client.Minecraft.addGraphicsAndWorldToCrashReport(Minecraft.java:2757)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:449)
+	at net.minecraft.client.main.Main.main(Main.java:113)
+	at Start.main(Start.java:11)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.8.8
+	Operating System: Windows 7 (amd64) version 6.1
+	CPU: 4x Intel(R) Core(TM) i5-2520M CPU @ 2.50GHz
+	Java Version: 1.8.0_301, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
+	Memory: 277052664 bytes (264 MB) / 460849152 bytes (439 MB) up to 919076864 bytes (876 MB)
+	JVM Flags: 0 total; 
+	IntCache: cache: 0, tcache: 0, allocated: 13, tallocated: 95
+	Launched Version: mcp
+	LWJGL: 2.9.4
+	OpenGL: Intel(R) HD Graphics 3000 GL version 3.1.0 - Build 9.17.10.4229, Intel
+	GL Caps: Using GL 1.3 multitexturing.
+Using GL 1.3 texture combiners.
+Using framebuffer objects because OpenGL 3.0 is supported and separate blending is supported.
+Shaders are available because OpenGL 2.1 is supported.
+VBOs are available because OpenGL 1.5 is supported.
+
+	Using VBOs: No
+	Is Modded: Definitely; Client brand changed to 'fml,forge'
+	Type: Client (map_client.txt)
+	Resource Packs: 
+	Current Language: English (US)
+	Profiler Position: N/A (disabled)
+	CPU: 4x Intel(R) Core(TM) i5-2520M CPU @ 2.50GHz
+	OptiFine Version: OptiFine_1.8.8_HD_U_H8
+	Render Distance Chunks: 4
+	Mipmaps: 4
+	Anisotropic Filtering: 1
+	Antialiasing: 0
+	Multitexture: false
+	Shaders: null
+	OpenGlVersion: 3.1.0 - Build 9.17.10.4229
+	OpenGlRenderer: Intel(R) HD Graphics 3000
+	OpenGlVendor: Intel
+	CpuCount: 4
