@@ -3187,3 +3187,7 @@
 [01:20:15] [Client thread/INFO]: [CHAT] That entity cannot be found
 [01:20:15] [Client thread/INFO]: [CHAT] That entity cannot be found
 [01:20:15] [Client thread/INFO]: [CHAT] That entity cannot be found
+[01:30:09] [Server thread/INFO]: Saving and pausing game...
+[01:30:09] [Server thread/INFO]: Saving chunks for level 'New World'/Overworld
+[01:30:09] [Server thread/INFO]: Saving chunks for level 'New World'/Nether
+[01:30:09] [Server thread/INFO]: Saving chunks for level 'New World'/The End
